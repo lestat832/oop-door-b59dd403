@@ -13,6 +13,9 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ["Inter", "sans-serif"],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -26,10 +29,6 @@ export default {
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
-        },
-        destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
         },
         muted: {
           DEFAULT: "hsl(var(--muted))",
@@ -47,15 +46,16 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        sidebar: {
-          DEFAULT: "hsl(var(--sidebar-background))",
-          foreground: "hsl(var(--sidebar-foreground))",
-          primary: "hsl(var(--sidebar-primary))",
-          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
-          accent: "hsl(var(--sidebar-accent))",
-          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
-          border: "hsl(var(--sidebar-border))",
-          ring: "hsl(var(--sidebar-ring))",
+        gesture: {
+          "swipe-up": "hsl(var(--swipe-up))",
+          "swipe-down": "hsl(var(--swipe-down))",
+          "swipe-left": "hsl(var(--swipe-left))",
+          "swipe-right": "hsl(var(--swipe-right))",
+          tap: "hsl(var(--tap))",
+          "double-tap": "hsl(var(--double-tap))",
+          "long-press": "hsl(var(--long-press))",
+          pinch: "hsl(var(--pinch))",
+          shake: "hsl(var(--shake))",
         },
       },
       borderRadius: {
