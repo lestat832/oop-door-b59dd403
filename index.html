@@ -454,35 +454,53 @@
             }
         }
 
-        // Form submission handler
-        document.getElementById('waitlistForm').addEventListener('submit', function(e) {
+        // Form submission handler - sends to Google Sheets
+        document.getElementById('waitlistForm').addEventListener('submit', async function(e) {
             e.preventDefault();
 
             const emailInput = document.getElementById('emailInput');
+            const email = emailInput.value;
             const successMessage = document.getElementById('successMessage');
             const submitButton = e.target.querySelector('.submit-button');
 
-            // Get button position for confetti
-            const rect = submitButton.getBoundingClientRect();
-            const x = rect.left + rect.width / 2;
-            const y = rect.top + rect.height / 2;
+            // Disable button while submitting
+            submitButton.disabled = true;
+            submitButton.textContent = 'Joining...';
 
-            // Create confetti burst
-            createConfetti(x, y);
+            try {
+                // Send to Google Sheets via Apps Script
+                await fetch('https://script.google.com/macros/s/AKfycbzxe7mRldcBgrZ4G44zZlp7MN1D8K8nrdAamNobL6Y5FS67slgAhPMS0WvVf1GvCSfIhw/exec', {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: email })
+                });
 
-            // Show success message
-            successMessage.classList.add('show');
+                // Get button position for confetti
+                const rect = submitButton.getBoundingClientRect();
+                const x = rect.left + rect.width / 2;
+                const y = rect.top + rect.height / 2;
 
-            // Clear input
-            emailInput.value = '';
+                // Create confetti burst
+                createConfetti(x, y);
 
-            // Hide success message after 5 seconds
-            setTimeout(() => {
-                successMessage.classList.remove('show');
-            }, 5000);
+                // Show success message
+                successMessage.classList.add('show');
 
-            // TODO: Add actual email collection backend
-            console.log('Email submitted (no backend configured yet)');
+                // Clear input
+                emailInput.value = '';
+
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    successMessage.classList.remove('show');
+                }, 5000);
+            } catch (error) {
+                console.error('Submission error:', error);
+                alert('Something went wrong. Please try again.');
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = 'Join the Waitlist';
+            }
         });
     </script>
 </body>
