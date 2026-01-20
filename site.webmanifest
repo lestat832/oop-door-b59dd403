@@ -1,0 +1,11 @@
+{
+  "name": "Out of Pocket",
+  "short_name": "Out of Pocket",
+  "icons": [
+    { "src": "/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "theme_color": "#9900FF",
+  "background_color": "#9900FF",
+  "display": "standalone"
+}
