@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Out of Pocket - Coming Soon</title>
+    <title>Out of Pocket - iOS Game</title>
     <link rel="icon" href="/favicon.ico" sizes="32x32">
     <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
     <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
@@ -113,150 +113,45 @@
             line-height: 1.4;
         }
 
-        .coming-soon-badge {
-            background: rgba(255, 255, 255, 0.15);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50px;
-            padding: 12px 40px;
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 40px;
-            backdrop-filter: blur(10px);
-            display: inline-block;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        /* Email form */
-        .email-form {
-            display: flex;
-            gap: 16px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-            width: 100%;
-            max-width: 600px;
-        }
-
-        .email-input {
-            flex: 1;
-            min-width: 250px;
-            padding: 16px 24px;
-            border: none;
-            border-radius: 50px;
-            font-size: 16px;
-            background: rgba(255, 255, 255, 0.95);
-            color: #1F2937;
-            outline: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .email-input::placeholder {
-            color: #9CA3AF;
-        }
-
-        .email-input:focus {
-            background: rgba(255, 255, 255, 1);
-            box-shadow: 0 6px 20px rgba(0, 102, 255, 0.3);
-            transform: translateY(-2px);
-        }
-
-        /* White gradient button with blue text (Lovable spec) */
-        .submit-button {
-            padding: 16px 40px;
-            border: none;
-            border-radius: 50px;
-            font-size: 16px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #FFFFFF 0%, #F5F5F5 100%);
-            color: var(--toy-blue);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .submit-button::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(0, 102, 255, 0.1);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-
-        .submit-button:hover {
-            transform: scale(1.03) translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 102, 255, 0.3);
-        }
-
-        .submit-button:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-
-        .submit-button:active {
-            transform: scale(0.98) translateY(0);
-        }
-
-        /* Success message with animation */
-        @keyframes scaleIn {
-            0% {
-                transform: scale(0);
-                opacity: 0;
-            }
-            50% {
-                transform: scale(1.1);
-            }
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-        @keyframes confetti {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        .success-message {
-            display: none;
-            margin-top: 20px;
+        /* App Store button */
+        .app-store-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
             padding: 16px 32px;
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(16, 185, 129, 0.3) 100%);
-            border: 2px solid rgba(16, 185, 129, 0.5);
-            border-radius: 50px;
-            color: #D1FAE5;
+            background: #000000;
+            border-radius: 12px;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .app-store-button:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .app-store-button svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .app-store-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            line-height: 1.2;
+        }
+
+        .app-store-text .small {
+            font-size: 12px;
+            font-weight: 400;
+        }
+
+        .app-store-text .large {
+            font-size: 22px;
             font-weight: 600;
-            font-size: 18px;
-            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
-        }
-
-        .success-message.show {
-            display: block;
-            animation: scaleIn 0.5s ease-out;
-        }
-
-        /* Confetti particles */
-        .confetti {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            animation: confetti 1.5s ease-out forwards;
-            pointer-events: none;
         }
 
         /* Bottom decoration bars - 5 bars with gesture colors */
@@ -392,22 +287,15 @@
         <h1>Out of Pocket</h1>
         <p class="subtitle">The fast-paced reflex + memory game for your phone.</p>
 
-        <div class="coming-soon-badge">Coming Soon</div>
-
-        <form class="email-form" id="waitlistForm">
-            <input
-                type="email"
-                class="email-input"
-                placeholder="Enter your email"
-                required
-                id="emailInput"
-            >
-            <button type="submit" class="submit-button">Join the Waitlist</button>
-        </form>
-
-        <div class="success-message" id="successMessage">
-            You're on the list! 🎉
-        </div>
+        <a href="https://apps.apple.com/app/id6756274838" class="app-store-button" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+            </svg>
+            <div class="app-store-text">
+                <span class="small">Download on the</span>
+                <span class="large">App Store</span>
+            </div>
+        </a>
     </div>
 
     <!-- 5 colored bars (gesture colors) -->
@@ -420,94 +308,8 @@
     </div>
 
     <footer>
-        © 2025 Out of Pocket · <a href="/privacy.html" style="color: white; opacity: 0.8; text-decoration: none;">Privacy Policy</a>
+        © 2026 Out of Pocket · <a href="/privacy.html" style="color: white; opacity: 0.8; text-decoration: none;">Privacy Policy</a>
     </footer>
 
-    <script>
-        // Gesture colors for confetti
-        const gestureColors = [
-            '#0066FF', // Toy Blue
-            '#00CC00', // Toy Green
-            '#FF0000', // Toy Red
-            '#FF6600', // Safety Orange
-            '#FFCC00', // Toy Yellow
-            '#9900FF', // Purple Pop
-            '#FF0099', // Bubble Pink
-            '#0099FF', // Sky Blue
-            '#00FFCC'  // Mint Fresh
-        ];
-
-        // Create confetti burst
-        function createConfetti(x, y) {
-            for (let i = 0; i < 15; i++) {
-                const confetti = document.createElement('div');
-                confetti.className = 'confetti';
-                confetti.style.left = x + 'px';
-                confetti.style.top = y + 'px';
-                confetti.style.background = gestureColors[Math.floor(Math.random() * gestureColors.length)];
-
-                const angle = (Math.random() * 360) * Math.PI / 180;
-                const velocity = 100 + Math.random() * 100;
-                const tx = Math.cos(angle) * velocity;
-                const ty = Math.sin(angle) * velocity;
-
-                confetti.style.setProperty('--tx', tx + 'px');
-                confetti.style.setProperty('--ty', ty + 'px');
-
-                document.body.appendChild(confetti);
-
-                setTimeout(() => confetti.remove(), 1500);
-            }
-        }
-
-        // Form submission handler - sends to Google Sheets
-        document.getElementById('waitlistForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-
-            const emailInput = document.getElementById('emailInput');
-            const email = emailInput.value;
-            const successMessage = document.getElementById('successMessage');
-            const submitButton = e.target.querySelector('.submit-button');
-
-            // Disable button while submitting
-            submitButton.disabled = true;
-            submitButton.textContent = 'Joining...';
-
-            try {
-                // Send to Google Sheets via Apps Script
-                await fetch('https://script.google.com/macros/s/AKfycbzxe7mRldcBgrZ4G44zZlp7MN1D8K8nrdAamNobL6Y5FS67slgAhPMS0WvVf1GvCSfIhw/exec', {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email: email })
-                });
-
-                // Get button position for confetti
-                const rect = submitButton.getBoundingClientRect();
-                const x = rect.left + rect.width / 2;
-                const y = rect.top + rect.height / 2;
-
-                // Create confetti burst
-                createConfetti(x, y);
-
-                // Show success message
-                successMessage.classList.add('show');
-
-                // Clear input
-                emailInput.value = '';
-
-                // Hide success message after 5 seconds
-                setTimeout(() => {
-                    successMessage.classList.remove('show');
-                }, 5000);
-            } catch (error) {
-                console.error('Submission error:', error);
-                alert('Something went wrong. Please try again.');
-            } finally {
-                submitButton.disabled = false;
-                submitButton.textContent = 'Join the Waitlist';
-            }
-        });
-    </script>
 </body>
 </html>
