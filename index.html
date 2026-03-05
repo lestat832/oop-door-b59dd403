@@ -3,27 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Out of Pocket - iOS Game</title>
-    <link rel="icon" href="/favicon.ico" sizes="32x32">
-    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
-    <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <meta name="theme-color" content="#9900FF">
+    <title>Out of Pocket - The Gesture Game for iOS</title>
+    <meta name="description" content="A chaotic game where your phone comes alive and reacts to every tap, shake, and pinch. Available now on iOS.">
+    <meta property="og:title" content="Out of Pocket - The Gesture Game for iOS">
+    <meta property="og:description" content="A chaotic game where your phone comes alive and reacts to every tap, shake, and pinch.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            /* 9 Gesture Colors */
-            --toy-blue: #0066FF;
-            --toy-green: #00CC00;
-            --toy-red: #FF0000;
-            --safety-orange: #FF6600;
-            --toy-yellow: #FFCC00;
-            --purple-pop: #9900FF;
-            --bubble-pink: #FF0099;
-            --sky-blue: #0099FF;
-            --mint-fresh: #00FFCC;
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -31,285 +19,547 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
             align-items: center;
-            background: linear-gradient(135deg, var(--purple-pop) 0%, var(--toy-blue) 50%, var(--mint-fresh) 100%);
-            color: white;
+            background: linear-gradient(180deg, #6CB4EE 0%, #87CEEB 30%, #B0D9F5 60%, #D4EFFF 100%);
+            color: #1a1a2e;
             overflow-x: hidden;
             position: relative;
+            cursor: url('assets/web/cursor.png') 0 0, auto;
         }
 
-        /* Floating dots animation */
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+        /* Pixel font */
+        .pixel {
+            font-family: 'Silkscreen', monospace;
         }
-
-        @keyframes float-alternate {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-        }
-
-        /* Top decoration dots - 9 floating dots */
-        .top-dots {
-            display: flex;
-            gap: 10px;
-            margin-top: 60px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-            justify-content: center;
-            padding: 0 20px;
-        }
-
-        .dot {
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            animation: float 3s ease-in-out infinite;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        .dot:nth-child(1) { background: var(--toy-blue); animation-delay: 0s; }
-        .dot:nth-child(2) { background: var(--toy-green); animation-delay: 0.2s; animation-name: float-alternate; }
-        .dot:nth-child(3) { background: var(--toy-red); animation-delay: 0.4s; }
-        .dot:nth-child(4) { background: var(--safety-orange); animation-delay: 0.6s; animation-name: float-alternate; }
-        .dot:nth-child(5) { background: var(--toy-yellow); animation-delay: 0.8s; }
-        .dot:nth-child(6) { background: var(--purple-pop); animation-delay: 1s; animation-name: float-alternate; }
-        .dot:nth-child(7) { background: var(--bubble-pink); animation-delay: 1.2s; }
-        .dot:nth-child(8) { background: var(--sky-blue); animation-delay: 1.4s; animation-name: float-alternate; }
-        .dot:nth-child(9) { background: var(--mint-fresh); animation-delay: 1.6s; }
 
         /* Main content */
-        .content {
+        main {
             flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 40px 20px;
+            padding: 40px 20px 40px;
             text-align: center;
-            max-width: 1200px;
-            width: 100%;
-        }
-
-        h1 {
-            font-size: clamp(48px, 12vw, 120px);
-            font-weight: 900;
-            margin-bottom: 20px;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
-        }
-
-        .subtitle {
-            font-size: clamp(18px, 3vw, 32px);
-            font-weight: 400;
-            margin-bottom: 40px;
-            opacity: 0.95;
             max-width: 800px;
-            line-height: 1.4;
+            width: 100%;
+            position: relative;
+            z-index: 2;
         }
 
-        /* App Store button */
-        .app-store-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            padding: 16px 32px;
-            background: #000000;
-            border-radius: 12px;
-            text-decoration: none;
-            color: white;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        /* Title */
+        .title {
+            margin-bottom: 24px;
+            line-height: 0.78;
         }
 
-        .app-store-button:hover {
-            transform: scale(1.05) translateY(-2px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+        .title-text {
+            font-family: 'Silkscreen', monospace;
+            font-size: clamp(60px, 12vw, 120px);
+            font-weight: 700;
+            color: #000000;
+            letter-spacing: 0px;
+            text-align: center;
+            display: block;
         }
 
-        .app-store-button svg {
-            width: 32px;
-            height: 32px;
+        /* Character container */
+        .character-container {
+            width: 280px;
+            aspect-ratio: 1410 / 1470;
+            margin-bottom: 24px;
+            position: relative;
+            animation: character-bob 3s ease-in-out infinite;
+            overflow: visible;
         }
 
-        .app-store-text {
+        .character-parts {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .part {
+            position: absolute;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+            pointer-events: none;
+        }
+
+        /* PhonePart positions — derived from 1410x1470 Idle.png canvas */
+        .part-body         { left: 14.89%; top: 2.04%;  width: 70.21%; }
+        .part-left-hand    { left: 0%;     top: 40.82%; width: 14.89%; }
+        .part-right-hand   { left: 85.11%; top: 40.82%; width: 14.89%; }
+        .part-left-eyebrow { left: 28.72%; top: 18.37%; width: 12.77%; }
+        .part-right-eyebrow{ left: 58.51%; top: 18.37%; width: 12.77%; }
+        .part-left-eye     { left: 26.59%; top: 24.49%; width: 17.02%; }
+        .part-right-eye    { left: 56.38%; top: 24.49%; width: 17.02%; }
+        .part-left-pupil   { left: 32.97%; top: 30.62%; width: 4.26%; transition: transform 0.08s ease-out; }
+        .part-right-pupil  { left: 62.76%; top: 30.62%; width: 4.26%; transition: transform 0.08s ease-out; }
+        .part-mouth        { left: 43.62%; top: 44.90%; width: 14.89%; }
+        .part-left-foot    { left: 29.79%; top: 87.76%; width: 14.89%; }
+        .part-right-foot   { left: 53.19%; top: 87.76%; width: 14.89%; }
+
+        .character-activated {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+        }
+
+        /* Accessory overlays */
+        .accessory-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            display: none;
+        }
+
+        .accessory-layer img {
+            position: absolute;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+        }
+
+        .acc-exclamation {
+            width: 11%;
+            right: -2%;
+            top: 3%;
+        }
+
+        .acc-shake-lines {
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .acc-arrow-purple-tr {
+            width: 11%;
+            right: -6%;
+            top: 3%;
+            transform: rotate(225deg);
+        }
+
+        .acc-arrow-purple-bl {
+            width: 11%;
+            left: -6%;
+            bottom: 8%;
+            transform: rotate(45deg);
+        }
+
+        @keyframes character-bob {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* Gesture pills */
+        .gesture-pills {
             display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            line-height: 1.2;
+            gap: 20px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
-        .app-store-text .small {
-            font-size: 12px;
+        .pill {
+            font-family: 'Silkscreen', monospace;
+            font-size: 18px;
+            color: #000000;
+            background: #FFFFFF;
+            border: 1px solid #000000;
+            border-radius: 23px;
+            padding: 10px 20px;
+            cursor: url('assets/web/cursor.png') 0 0, pointer;
+            box-shadow: 2px 2px 0px 0px #000000;
+            transition: all 0.15s ease;
+            line-height: 1;
+            white-space: nowrap;
+        }
+
+        .pill:hover {
+            transform: translate(1px, 1px);
+            box-shadow: 1px 1px 0px 0px #000000;
+        }
+
+        .pill:active {
+            transform: translate(2px, 2px);
+            box-shadow: 0px 0px 0px 0px #000000;
+        }
+
+        .pill.active {
+            background: #4ADE40;
+        }
+
+        /* Tagline */
+        .tagline {
+            font-size: clamp(14px, 2.5vw, 18px);
             font-weight: 400;
+            color: #1a1a2e;
+            margin-bottom: 32px;
+            max-width: 400px;
+            line-height: 1.5;
         }
 
-        .app-store-text .large {
-            font-size: 22px;
-            font-weight: 600;
+        /* CTA Button */
+        .cta-button {
+            display: inline-block;
+            font-family: 'Silkscreen', monospace;
+            font-size: clamp(14px, 2.5vw, 18px);
+            font-weight: 700;
+            color: #000;
+            background: #4ADE40;
+            border: 3px solid #000;
+            padding: 16px 48px;
+            text-decoration: none;
+            box-shadow: 4px 4px 0px #000;
+            transition: all 0.15s ease;
+            cursor: url('assets/web/cursor.png') 0 0, pointer;
         }
 
-        /* Bottom decoration bars - 5 bars with gesture colors */
-        .bottom-bars {
+        .cta-button:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px #000;
+            background: #3BC732;
+        }
+
+        .cta-button:active {
+            transform: translate(4px, 4px);
+            box-shadow: 0px 0px 0px #000;
+        }
+
+        /* Floating decorations */
+        .decorations {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .decoration {
+            position: absolute;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+        }
+
+        @keyframes float-slow {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+        }
+
+        @keyframes float-medium {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        @keyframes float-fast {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+
+        .ghost-1 { width: 40px; top: 14%; left: 8%; animation: float-slow 6s ease-in-out infinite; }
+        .ghost-2 { width: 35px; top: 55%; right: 6%; animation: float-medium 5s ease-in-out infinite 1.5s; }
+        .heart-1 { width: 28px; top: 12%; right: 22%; animation: float-fast 4s ease-in-out infinite 0.3s; }
+        .heart-2 { width: 22px; top: 60%; left: 10%; animation: float-fast 3.5s ease-in-out infinite 1s; }
+        .star-1 { width: 32px; top: 30%; left: 14%; animation: float-medium 5s ease-in-out infinite 0.5s; }
+        .star-2 { width: 28px; top: 55%; right: 18%; animation: float-slow 6s ease-in-out infinite 2s; }
+
+        /* Marquee bar */
+        .marquee-bar {
+            width: 100%;
+            background: #1a1a2e;
+            padding: 14px 0;
+            overflow: hidden;
+            position: relative;
+            z-index: 3;
+        }
+
+        .marquee-content {
             display: flex;
-            gap: 16px;
-            margin-bottom: 30px;
+            white-space: nowrap;
+            animation: marquee-scroll 20s linear infinite;
         }
 
-        .bar {
-            width: 60px;
-            height: 5px;
-            border-radius: 3px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        .marquee-content span {
+            font-family: 'Silkscreen', monospace;
+            font-size: 16px;
+            color: #fff;
+            letter-spacing: 3px;
+            padding-right: 20px;
         }
 
-        .bar:nth-child(1) { background: var(--toy-green); }
-        .bar:nth-child(2) { background: var(--safety-orange); }
-        .bar:nth-child(3) { background: var(--bubble-pink); }
-        .bar:nth-child(4) { background: var(--toy-yellow); }
-        .bar:nth-child(5) { background: var(--sky-blue); }
+        @keyframes marquee-scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
 
         /* Footer */
         footer {
-            padding: 30px 20px;
-            font-size: 14px;
-            opacity: 0.8;
+            width: 100%;
+            background: #1a1a2e;
+            padding: 16px 20px;
+            text-align: center;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+            z-index: 3;
         }
 
-        /* Decorative accent lines */
-        .accent-lines {
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 200px;
-            pointer-events: none;
-            opacity: 0.1;
-        }
-
-        .accent-line {
-            position: absolute;
-            height: 2px;
-            border-radius: 1px;
-        }
-
-        .accent-line:nth-child(1) {
-            width: 300px;
-            background: var(--toy-red);
-            top: 20%;
-            left: 10%;
-            transform: rotate(-15deg);
-        }
-
-        .accent-line:nth-child(2) {
-            width: 400px;
-            background: var(--toy-yellow);
-            top: 60%;
-            right: 10%;
-            transform: rotate(15deg);
-        }
-
-        .accent-line:nth-child(3) {
-            width: 250px;
-            background: var(--mint-fresh);
-            top: 40%;
-            left: 50%;
-            transform: translateX(-50%) rotate(-5deg);
-        }
-
-        /* Responsive adjustments */
+        /* Responsive */
         @media (max-width: 640px) {
-            .top-dots {
-                margin-top: 40px;
-                gap: 8px;
+            main {
+                padding: 30px 16px 24px;
             }
 
-            .dot {
-                width: 14px;
-                height: 14px;
+            .character-container {
+                width: 200px;
+                margin-bottom: 20px;
             }
 
-            .email-form {
-                flex-direction: column;
-                gap: 12px;
+            .gesture-pills {
+                gap: 10px;
             }
 
-            .email-input {
-                min-width: 100%;
+            .pill {
+                font-size: 14px;
+                padding: 8px 14px;
             }
 
-            .submit-button {
-                width: 100%;
+            .cta-button {
+                padding: 14px 32px;
+                font-size: 13px;
             }
 
-            .bottom-bars {
-                gap: 12px;
-            }
-
-            .bar {
-                width: 40px;
-                height: 4px;
-            }
-
-            .accent-lines {
+            .ghost-2,
+            .star-2,
+            .heart-2 {
                 display: none;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Decorative accent lines -->
-    <div class="accent-lines">
-        <div class="accent-line"></div>
-        <div class="accent-line"></div>
-        <div class="accent-line"></div>
+    <!-- Floating PNG decorations -->
+    <div class="decorations">
+        <img class="decoration ghost-1" src="assets/web/ghost.png" alt="" draggable="false">
+        <img class="decoration ghost-2" src="assets/web/ghost.png" alt="" draggable="false">
+        <img class="decoration heart-1" src="assets/web/heart.png" alt="" draggable="false">
+        <img class="decoration heart-2" src="assets/web/heart.png" alt="" draggable="false">
+        <img class="decoration star-1" src="assets/web/star.png" alt="" draggable="false">
+        <img class="decoration star-2" src="assets/web/star.png" alt="" draggable="false">
     </div>
 
-    <!-- 9 floating dots (all gesture colors) -->
-    <div class="top-dots">
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-    </div>
+    <!-- Main content -->
+    <main>
+        <!-- Title -->
+        <div class="title">
+            <span class="title-text pixel">OUT OF POCKET</span>
+        </div>
 
-    <div class="content">
-        <h1>Out of Pocket</h1>
-        <p class="subtitle">The fast-paced reflex + memory game for your phone.</p>
-
-        <a href="https://apps.apple.com/app/id6756274838" class="app-store-button" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-            </svg>
-            <div class="app-store-text">
-                <span class="small">Download on the</span>
-                <span class="large">App Store</span>
+        <!-- Character (composited PhoneParts PNGs with eye tracking) -->
+        <div class="character-container" id="character">
+            <div id="characterIdle" class="character-parts">
+                <!-- Hands (behind body) -->
+                <img class="part part-left-hand" src="assets/web/parts/left_hand.png" alt="" draggable="false">
+                <img class="part part-right-hand" src="assets/web/parts/right_hand.png" alt="" draggable="false">
+                <!-- Body -->
+                <img class="part part-body" src="assets/web/parts/phone_body.png" alt="" draggable="false">
+                <!-- Face features -->
+                <img class="part part-left-eyebrow" src="assets/web/parts/left_eyebrow.png" alt="" draggable="false">
+                <img class="part part-right-eyebrow" src="assets/web/parts/right_eyebrow.png" alt="" draggable="false">
+                <img class="part part-left-eye" src="assets/web/parts/left_eye.png" alt="" draggable="false">
+                <img class="part part-right-eye" src="assets/web/parts/right_eye.png" alt="" draggable="false">
+                <img class="part part-left-pupil" id="leftPupil" src="assets/web/parts/left_pupil.png" alt="" draggable="false">
+                <img class="part part-right-pupil" id="rightPupil" src="assets/web/parts/right_pupil.png" alt="" draggable="false">
+                <img class="part part-mouth" src="assets/web/parts/mouth.png" alt="" draggable="false">
+                <!-- Feet -->
+                <img class="part part-left-foot" src="assets/web/parts/left_foot.png" alt="" draggable="false">
+                <img class="part part-right-foot" src="assets/web/parts/right_foot.png" alt="" draggable="false">
             </div>
-        </a>
-    </div>
+            <img class="character-activated" id="characterActivated" src="" alt="" style="display:none;" draggable="false">
+            <!-- Accessory overlays per gesture -->
+            <div class="accessory-layer" id="accTap">
+                <img class="acc-exclamation" src="assets/web/accessories/exclamation.png" alt="" draggable="false">
+            </div>
+            <div class="accessory-layer" id="accPinch">
+                <img class="acc-arrow-purple-tr" src="assets/web/accessories/arrow_purple.png" alt="" draggable="false">
+                <img class="acc-arrow-purple-bl" src="assets/web/accessories/arrow_purple.png" alt="" draggable="false">
+            </div>
+            <div class="accessory-layer" id="accShake">
+                <img class="acc-shake-lines" src="assets/web/accessories/motionline_shake.png" alt="" draggable="false">
+            </div>
+            <div class="accessory-layer" id="accHold">
+                <img class="acc-exclamation" src="assets/web/accessories/exclamation.png" alt="" draggable="false">
+            </div>
+        </div>
 
-    <!-- 5 colored bars (gesture colors) -->
-    <div class="bottom-bars">
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
+        <!-- Gesture CTA pills -->
+        <div class="gesture-pills">
+            <button class="pill" data-gesture="tap">TAP IT</button>
+            <button class="pill" data-gesture="pinch">PINCH IT</button>
+            <button class="pill" data-gesture="shake">SHAKE IT</button>
+            <button class="pill" data-gesture="hold">HOLD IT</button>
+        </div>
+
+        <!-- Tagline -->
+        <p class="tagline">A chaotic game where your phone comes alive and reacts to every tap, shake, and pinch.</p>
+
+        <!-- CTA Button -->
+        <a href="https://apps.apple.com/app/id6756274838" class="cta-button pixel" target="_blank" rel="noopener noreferrer">
+            GET IT ON APP STORE
+        </a>
+    </main>
+
+    <!-- Scrolling marquee -->
+    <div class="marquee-bar">
+        <div class="marquee-content">
+            <span>THE REFLEX GAME YOUR PHONE WASN'T READY FOR &#9670; THE REFLEX GAME YOUR PHONE WASN'T READY FOR &#9670; THE REFLEX GAME YOUR PHONE WASN'T READY FOR &#9670; THE REFLEX GAME YOUR PHONE WASN'T READY FOR &#9670;&nbsp;</span>
+            <span>THE REFLEX GAME YOUR PHONE WASN'T READY FOR &#9670; THE REFLEX GAME YOUR PHONE WASN'T READY FOR &#9670; THE REFLEX GAME YOUR PHONE WASN'T READY FOR &#9670; THE REFLEX GAME YOUR PHONE WASN'T READY FOR &#9670;&nbsp;</span>
+        </div>
     </div>
 
     <footer>
-        © 2026 Out of Pocket · <a href="/privacy.html" style="color: white; opacity: 0.8; text-decoration: none;">Privacy Policy</a>
+        &copy; 2026 Out of Pocket
     </footer>
 
+    <script>
+        // === Eye tracking — pupils follow mouse cursor ===
+        const charContainer = document.getElementById('character');
+        const leftPupil = document.getElementById('leftPupil');
+        const rightPupil = document.getElementById('rightPupil');
+
+        // Eye centers as percentages of the 1410x1470 canvas
+        const LEFT_EYE = { xPct: 0.3511, yPct: 0.3265 };
+        const RIGHT_EYE = { xPct: 0.6489, yPct: 0.3265 };
+        const MAX_OFFSET = 6;
+
+        function updateEyes(clientX, clientY) {
+            const rect = charContainer.getBoundingClientRect();
+            const mouseXPct = (clientX - rect.left) / rect.width;
+            const mouseYPct = (clientY - rect.top) / rect.height;
+
+            [
+                { el: leftPupil, center: LEFT_EYE },
+                { el: rightPupil, center: RIGHT_EYE }
+            ].forEach(({ el, center }) => {
+                const dx = mouseXPct - center.xPct;
+                const dy = mouseYPct - center.yPct;
+                const angle = Math.atan2(dy, dx);
+                const distance = Math.min(Math.hypot(dx, dy) * 30, MAX_OFFSET);
+
+                const offsetX = Math.cos(angle) * distance;
+                const offsetY = Math.sin(angle) * distance;
+
+                el.style.transform = `translate(${offsetX.toFixed(1)}px, ${offsetY.toFixed(1)}px)`;
+            });
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            resetIdleTimer();
+            requestAnimationFrame(() => updateEyes(e.clientX, e.clientY));
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            const touch = e.touches[0];
+            requestAnimationFrame(() => updateEyes(touch.clientX, touch.clientY));
+        }, { passive: true });
+
+        // Reset pupils to center when mouse leaves or goes idle
+        let idleTimeout = null;
+
+        function centerPupils() {
+            leftPupil.style.transition = 'transform 0.4s ease-out';
+            rightPupil.style.transition = 'transform 0.4s ease-out';
+            leftPupil.style.transform = 'translate(0px, 0px)';
+            rightPupil.style.transform = 'translate(0px, 0px)';
+        }
+
+        function resetIdleTimer() {
+            if (idleTimeout) clearTimeout(idleTimeout);
+            // Restore fast tracking transition
+            leftPupil.style.transition = 'transform 0.08s ease-out';
+            rightPupil.style.transition = 'transform 0.08s ease-out';
+            idleTimeout = setTimeout(centerPupils, 2000);
+        }
+
+        document.addEventListener('mouseleave', centerPupils);
+
+        // === Gesture pill interactions ===
+        const GESTURE_ASSETS = {
+            tap: 'assets/web/tap_activated.png',
+            pinch: 'assets/web/pinch_activated.png',
+            shake: 'assets/web/shake_activated.png',
+            hold: 'assets/web/longpress_activated.png'
+        };
+
+        // Preload activated state images
+        Object.values(GESTURE_ASSETS).forEach(src => {
+            const img = new Image();
+            img.src = src;
+        });
+
+        let activatedTimeout = null;
+
+        const GESTURE_ACCESSORY_IDS = {
+            tap: 'accTap',
+            pinch: 'accPinch',
+            shake: 'accShake',
+            hold: 'accHold'
+        };
+
+        function hideAllAccessories() {
+            Object.values(GESTURE_ACCESSORY_IDS).forEach(id => {
+                document.getElementById(id).style.display = 'none';
+            });
+        }
+
+        document.querySelectorAll('.pill').forEach(pill => {
+            pill.addEventListener('click', () => {
+                const gesture = pill.dataset.gesture;
+                const activatedSrc = GESTURE_ASSETS[gesture];
+                if (!activatedSrc) return;
+
+                const idleEl = document.getElementById('characterIdle');
+                const activatedEl = document.getElementById('characterActivated');
+
+                // Clear any pending revert
+                if (activatedTimeout) clearTimeout(activatedTimeout);
+
+                // Show activated state
+                activatedEl.src = activatedSrc;
+                activatedEl.style.display = 'block';
+                idleEl.style.display = 'none';
+
+                // Show matching accessory
+                hideAllAccessories();
+                const accId = GESTURE_ACCESSORY_IDS[gesture];
+                if (accId) document.getElementById(accId).style.display = 'block';
+
+                // Highlight the pill
+                document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+                pill.classList.add('active');
+
+                // Revert after 1.5s
+                activatedTimeout = setTimeout(() => {
+                    activatedEl.style.display = 'none';
+                    idleEl.style.display = 'block';
+                    hideAllAccessories();
+                    pill.classList.remove('active');
+                    activatedTimeout = null;
+                }, 1500);
+            });
+        });
+    </script>
 </body>
 </html>
