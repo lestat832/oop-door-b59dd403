@@ -4,10 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Out of Pocket - The Gesture Game for iOS</title>
-    <meta name="description" content="A chaotic game where your phone comes alive and reacts to every tap, shake, and pinch. Available now on iOS.">
+    <meta name="description" content="A chaotic gesture game where your phone comes alive and reacts to every tap, shake and pinch. 14 gestures across 5 game modes. Free on iOS.">
+    <link rel="canonical" href="https://getoutofpocket.com/">
     <meta property="og:title" content="Out of Pocket - The Gesture Game for iOS">
-    <meta property="og:description" content="A chaotic game where your phone comes alive and reacts to every tap, shake, and pinch.">
+    <meta property="og:description" content="A chaotic gesture game where your phone comes alive and reacts to every tap, shake and pinch. 14 gestures across 5 game modes.">
     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://getoutofpocket.com/">
+    <meta property="og:image" content="https://getoutofpocket.com/android-chrome-512x512.png">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="512">
+    <meta property="og:site_name" content="Out of Pocket">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Out of Pocket - The Gesture Game for iOS">
+    <meta name="twitter:description" content="A chaotic gesture game where your phone comes alive and reacts to every tap, shake and pinch. 14 gestures across 5 game modes.">
+    <meta name="twitter:image" content="https://getoutofpocket.com/android-chrome-512x512.png">
+    <meta name="apple-itunes-app" content="app-id=6756274838">
+    <meta name="theme-color" content="#6CB4EE">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MobileApplication",
+      "name": "Out of Pocket",
+      "operatingSystem": "iOS",
+      "applicationCategory": "GameApplication",
+      "description": "A chaotic gesture-based reflex game with 14 unique phone gestures across 5 game modes. React to rapid-fire prompts by tapping, swiping, shaking, pinching and tilting your phone.",
+      "url": "https://getoutofpocket.com",
+      "downloadUrl": "https://apps.apple.com/app/id6756274838",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Out of Pocket",
+        "url": "https://getoutofpocket.com"
+      }
+    }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
@@ -316,6 +354,18 @@
             z-index: 3;
         }
 
+        /* Screen reader only (accessible, crawlable) */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
         /* Responsive */
         @media (max-width: 640px) {
             main {
@@ -364,7 +414,7 @@
     <main>
         <!-- Title -->
         <div class="title">
-            <span class="title-text pixel">OUT OF POCKET</span>
+            <h1 class="title-text pixel">OUT OF POCKET</h1>
         </div>
 
         <!-- Character (composited PhoneParts PNGs with eye tracking) -->
@@ -374,7 +424,7 @@
                 <img class="part part-left-hand" src="assets/web/parts/left_hand.png" alt="" draggable="false">
                 <img class="part part-right-hand" src="assets/web/parts/right_hand.png" alt="" draggable="false">
                 <!-- Body -->
-                <img class="part part-body" src="assets/web/parts/phone_body.png" alt="" draggable="false">
+                <img class="part part-body" src="assets/web/parts/phone_body.png" alt="Out of Pocket phone character" draggable="false">
                 <!-- Face features -->
                 <img class="part part-left-eyebrow" src="assets/web/parts/left_eyebrow.png" alt="" draggable="false">
                 <img class="part part-right-eyebrow" src="assets/web/parts/right_eyebrow.png" alt="" draggable="false">
@@ -387,7 +437,7 @@
                 <img class="part part-left-foot" src="assets/web/parts/left_foot.png" alt="" draggable="false">
                 <img class="part part-right-foot" src="assets/web/parts/right_foot.png" alt="" draggable="false">
             </div>
-            <img class="character-activated" id="characterActivated" src="" alt="" style="display:none;" draggable="false">
+            <img class="character-activated" id="characterActivated" src="" alt="Character reacting to gesture" style="display:none;" draggable="false">
             <!-- Accessory overlays per gesture -->
             <div class="accessory-layer" id="accTap">
                 <img class="acc-exclamation" src="assets/web/accessories/exclamation.png" alt="" draggable="false">
@@ -413,7 +463,13 @@
         </div>
 
         <!-- Tagline -->
-        <p class="tagline">A chaotic game where your phone comes alive and reacts to every tap, shake, and pinch.</p>
+        <p class="tagline">A chaotic game where your phone comes alive and reacts to every tap, shake and pinch.</p>
+
+        <!-- SEO/GEO: crawlable description for search and AI engines -->
+        <section class="sr-only">
+            <h2>About Out of Pocket</h2>
+            <p>Out of Pocket is a free gesture-based reflex game for iOS. Players respond to rapid-fire prompts by tapping, swiping, shaking, pinching and tilting their phone across 14 unique gestures. The game features 5 modes: Classic for pure reflex speed, Memory for pattern recall, Stroop for cognitive challenges, Tilt for motion-based gameplay and PvP for head-to-head competition on a single device.</p>
+        </section>
 
         <!-- CTA Button -->
         <a href="https://apps.apple.com/app/id6756274838" class="cta-button pixel" target="_blank" rel="noopener noreferrer">
@@ -430,7 +486,7 @@
     </div>
 
     <footer>
-        &copy; 2026 Out of Pocket
+        &copy; 2026 Out of Pocket &middot; <a href="/privacy.html" style="color: rgba(255,255,255,0.6); text-decoration: none;">Privacy Policy</a>
     </footer>
 
     <script>

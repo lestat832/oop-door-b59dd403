@@ -1,0 +1,9 @@
+# Out of Pocket
+> A gesture-based reflex game for iOS
+
+Out of Pocket is a free iOS game featuring 14 unique phone gestures across 5 game modes. Players react to rapid-fire prompts by tapping, swiping, shaking, pinching and tilting their phone. Game modes include Classic for reflex speed, Memory for pattern recall, Stroop for cognitive challenges, Tilt for motion control and PvP for head-to-head play on a single device.
+
+## Links
+- App Store: https://apps.apple.com/app/id6756274838
+- Website: https://getoutofpocket.com
+- Privacy Policy: https://getoutofpocket.com/privacy.html
