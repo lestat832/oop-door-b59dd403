@@ -1,0 +1,11 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "DJAG2KBKT9.com.ourappologies.outofpocket",
+        "paths": ["/open", "/play/*"]
+      }
+    ]
+  }
+}
